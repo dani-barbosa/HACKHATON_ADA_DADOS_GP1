@@ -1,0 +1,61 @@
+HACKATHON ELAS+ TECH | DADOS — GRUPO 1
+Tema 3: Risk Intelligence (Inteligência de Risco de Crédito — BNDES)
+Equipe: Daniela Barbosa, Louise Ferreira, Nathalia Batista
+
+========================================================
+REPOSITÓRIO GITHUB (acesso público):
+https://github.com/dani-barbosa/HACKHATON_ADA_DADOS_GP1
+========================================================
+
+ARQUIVO PRINCIPAL:
+  bndes_risk_intelligence.ipynb  — notebook único com todo o projeto
+
+COMO EXECUTAR:
+  1. git clone https://github.com/dani-barbosa/HACKHATON_ADA_DADOS_GP1.git
+  2. cd HACKHATON_ADA_DADOS_GP1
+  3. pip install -r requirements.txt
+  4. jupyter notebook bndes_risk_intelligence.ipynb
+  (Os dados são baixados automaticamente via URL no próprio notebook)
+
+--------------------------------------------------------
+COBERTURA DOS 4 REQUISITOS TÉCNICOS OBRIGATÓRIOS
+--------------------------------------------------------
+
+[1] ANÁLISE ESTATÍSTICA EXPLORATÓRIA
+    Seção 3 — 15 perguntas de negócio com storytelling
+    Análise de distribuição, correlação, outliers, heatmaps,
+    evolução temporal, segmentação por porte/setor/UF/garantia.
+
+[2] SQL (SQLite via Python)
+    Seção 6 — 8 queries progressivas
+    - CREATE TABLE + populate via sqlite3 / pandas.to_sql
+    - Queries: window functions, CTE, self-join, JOIN com tabela macro
+    - Banco: data/bndes_risk.db (incluído no repositório)
+    - Tabelas: contratos, macro_bcb, predictions, committee_decisions
+
+[3] ANÁLISES / STORYTELLING / VISUALIZAÇÕES
+    - 15 narrativas analíticas nas seções de EDA
+    - 12 gráficos salvos em data/figures/
+      (ROC/PR, SHAP summary, calibração, fairness, viés regional,
+       lift/gain chart, distribuição de target, threshold)
+    - Toda visualização em Python (matplotlib + seaborn)
+
+[4] MODELO DE MACHINE LEARNING
+    Seção 8 — 4 modelos comparados com validação temporal
+    - Modelos: Regressão Logística, Random Forest, XGBoost, LightGBM
+    - Validação cruzada temporal (TimeSeriesSplit, 5 folds)
+    - Tuning via RandomizedSearchCV
+    - XGBoost campeão: AUC-ROC 0.7629 | KS 0.4326
+    - Calibração de probabilidades (CalibratedClassifierCV)
+    - Análise de fairness por UF
+    - Explicabilidade SHAP (summary + waterfall)
+    - Modelo salvo: data/models/bndes_risk_model.pkl
+
+DIFERENCIAL:
+    Seção 10 — Comitê de Risco Inteligente com 4 agentes IA
+    (Analista, Jurídico, Defensor, Presidente) usando Ollama (local)
+    com fundamento legal (LGPD, Resolução CMN 4.966/2021)
+
+DATASET:
+    23.419 contratos BNDES (2002–2026)
+    Fonte: https://raw.githubusercontent.com/dani-barbosa/HACKHATON_ADA_DADOS_GP1/main/data/raw/bndes_op.csv
